@@ -1,0 +1,12 @@
+Geometric=function(p,n){
+  prob=dgeom(1:n,p);
+  barplot(prob,space=0.3,names.arg=1:n,main='Geometric(p)');
+  prob;
+}
+Geometric(0.5,10)
+Poisson=function(l,n){
+  prob=dpois(1:n,l);
+  barplot(prob,space=0.3,names.arg=1:n,main='Poisson(l)');
+  prob;
+}
+Poisson(0.5,10)
