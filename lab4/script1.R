@@ -280,7 +280,7 @@ Nmin = (1/4)*(z/epsilon)^2
 Nmin
 MCnrdays(Nmin + 1)
 
-#4.2
+#4.2 varianta 1
 MC_prob_all_infected <- function(N) {
   count_all_infected <- 0
   for (i in 1:N) {
