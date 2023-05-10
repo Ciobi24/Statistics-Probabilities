@@ -353,3 +353,47 @@ result <- MC_prob_at_least_15_infected_error(target_error, confidence)
 
 cat("Probabilitatea ca într-o anumită zi cel puțin 15 computere să fie infectate:", result$probability, "\n")
 cat("Eroarea estimării:", result$error, "\n")
+
+#4.2 var2
+MC_infection = function(num_of_computers, inf_prob, k, expected_num) {
+  infected = vector(mode = "logical", length = num_of_computers)
+  infected[1] = TRUE
+  infected[2:num_of_computers] = FALSE
+  num_infected = 1
+  while (num_infected < expected_num && num_infected > 0) {
+    for (i in 1:num_of_computers) {
+      if (infected[i] == FALSE) {
+        infected[i] = sum(runif(num_infected, 0, 1) < inf_prob) != 0
+      }
+    }
+    num_infected = sum(infected)
+    if (num_infected < expected_num && num_infected  > 0) {
+      index = ceiling(runif(1, 0, 4))
+      for (i in 1:min(k[index], num_infected)) {
+        removal = ceiling(runif(1, 0, num_infected))
+        infected[which(infected)][removal] = FALSE;
+        num_infected = num_infected - 1;
+      }
+    }
+  }
+  return (num_infected >= expected_num)
+}
+MC_infection(40, 0.2, c(4, 6, 8, 10), 40)
+
+MC_prob = function(N, num_of_computers, inf_prob, k, expected_num) {
+  s = 0;
+  for (i in 1:N) {
+    s = s + MC_infection(num_of_computers, inf_prob, k, expected_num)
+  }
+  return (s / N)
+}
+MC_prob(10000, 40, 0.2, c(4, 6, 8, 10), 40)
+MC_prob(10000, 40, 0.2, c(4, 6, 8, 10), 15)
+
+alfa = 1 - 0.95
+z = qnorm(alfa / 2)
+epsilon = 0.01
+p = 0.5
+N_min = p * (1 - p) * (z / epsilon) ^ 2
+N_min
+MC_prob(N_min + 1, 40, 0.2, c(4, 6, 8, 10), 40)
