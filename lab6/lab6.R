@@ -148,4 +148,4 @@ test_proportion = function(alfa,n,succese,p0,tip_ip){
   }
 }
 #4.2
-test_proportion(alfa = 0.05, n = 150, succese = 20, p0 = 0.10, tip_ip = "s")
+test_proportion(alfa = 0.05, n = 150, succese = 20, p0 = 0.10, tip_ip = "r")
