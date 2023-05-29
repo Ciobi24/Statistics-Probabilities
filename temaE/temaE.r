@@ -28,7 +28,7 @@ test_proport = function(alfa, n, succese, p0, tip_ip) {
   if(tip_ip == "l") {
     critical_z = qnorm(alfa, 0, 1)
     cat("critical_z=", critical_z)
-    if(z_score <= critical_z)
+    if(z_score >= critical_z)
       print("H0 nu se poate respinge")
     else
       print("H0 se respinge")
